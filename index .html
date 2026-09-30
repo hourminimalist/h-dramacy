@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H. DRAMACY DESIGN</title>
+    <!-- Google Fonts: Inter & Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #808080;
+            color: #0A0A0A;
+        }
+
+        /* Subtle Noise Texture Background Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/></svg>');
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Architectural Grid Lines Background Overlay */
+        .arch-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            pointer-events: none;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            right: 0;
+            padding: 0 24px;
+        }
+
+        .arch-grid-col {
+            border-right: 1px solid rgba(128, 128, 128, 0.1);
+            height: 100%;
+            animation: gridPulse 6s ease-in-out infinite alternate;
+        }
+
+        .arch-grid-col:first-child {
+            border-left: 1px solid rgba(128, 128, 128, 0.1);
+        }
+
+        @keyframes gridPulse {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Subtle Cursor Spotlight Effect */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(128, 128, 128, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height: 0.3s;
+            z-index: 999;
+        }
+
+        @keyframes artisticEntrance {
+            from { opacity: 0; filter: blur(8px); transform: translateY(12px); }
+            to { opacity: 1; filter: blur(0); transform: translateY(0); }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0A0A0A;
+            color: #A0A0A0;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+            animation: artisticEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Light Theme Support (Gray Scale Only) */
+        body.light-theme {
+            background-color: #F0F0F0;
+            color: #505050;
+        }
+        body.light-theme::before { opacity: 0.02; }
+        body.light-theme .arch-grid-col { border-right: 1px solid rgba(128, 128, 128, 0.15); border-left: 1px solid rgba(128, 128, 128, 0.15); }
+        body.light-theme .divider { background-color: #C8C8C8; }
+        body.light-theme .logo-showcase { background-color: #E5E5E5; border-color: #C8C8C8; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        body.light-theme .artistic-marquee { border-top: 1px solid #C8C8C8; border-bottom: 1px solid #C8C8C8; background: rgba(229, 229, 229, 0.5); }
+        body.light-theme .brand-titles h1 { color: #303030; }
+        body.light-theme .menu-btn span { background-color: #303030; }
+        body.light-theme .theme-toggle-btn { color: #303030; }
+        body.light-theme .front-contact .contact-line { color: #707070; }
+        body.light-theme .front-contact .contact-line:hover { color: #303030; }
+        body.light-theme footer { color: #808080; }
+        body.light-theme .overlay-menu { background-color: #F0F0F0; }
+        body.light-theme .menu-links a { color: #303030; }
+        body.light-theme .content-modal { background-color: rgba(240, 240, 240, 0.97); }
+        body.light-theme .back-to-home { color: #303030; }
+        body.light-theme .editorial-heading-wrap { border-bottom: 1px solid #C8C8C8; }
+        body.light-theme .content-modal h2 { color: #303030; }
+        body.light-theme .editorial-col-box, body.light-theme .pro-item { background: rgba(229, 229, 229, 0.4); border-color: #C8C8C8; }
+        body.light-theme .pro-item a, body.light-theme .pro-item p { color: #606060; }
+        body.light-theme .service-accordion-item { border-color: #C8C8C8; }
+        body.light-theme .service-accordion-header { color: #303030; }
+        body.light-theme .service-accordion-header:hover { background-color: rgba(128, 128, 128, 0.05); }
+        body.light-theme .service-accordion-content { background: rgba(229, 229, 229, 0.3); border-top: 1px solid #C8C8C8; color: #606060; }
+        body.light-theme .form-group .form-input { border-bottom: 1px solid #B0B0B0; color: #303030; }
+        body.light-theme .editorial-submit-btn { border-color: #B0B0B0; color: #303030; }
+        body.light-theme .editorial-submit-btn:hover { background: #303030; color: #F0F0F0; border-color: #303030; }
+        body.light-theme .geo-line { stroke: #303030; }
+        body.light-theme .geo-accent { stroke: #808080; }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Style */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .brand-titles h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            letter-spacing: 0.18em;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: #C0C0C0;
+            transition: color 0.4s, letter-spacing 0.4s;
+        }
+        .brand-titles h1:hover { letter-spacing: 0.22em; }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: #C0C0C0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            z-index: 1001;
+            padding: 0;
+        }
+
+        .theme-toggle-btn svg {
+            width: 16px; height: 16px;
+            stroke: currentColor; fill: none; stroke-width: 1.5;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .theme-toggle-btn:hover { color: #808080; transform: rotate(90deg) scale(1.1); }
+
+        .menu-btn {
+            background: none; border: none; cursor: pointer;
+            display: flex; flex-direction: column; justify-content: space-between;
+            width: 24px; height: 14px; padding: 0; z-index: 1001; position: relative;
+        }
+
+        .menu-btn span {
+            display: block; width: 100%; height: 1px;
+            background-color: #C0C0C0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-btn.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .menu-btn.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .menu-btn.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+        .divider {
+            width: 100%; height: 1px;
+            background-color: #282828;
+            margin-bottom: 32px;
+            transition: background-color 0.4s;
+        }
+
+        /* Logo Showcase (Magnetic Effect) */
+        .logo-showcase {
+            width: 100%; height: 285px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: #121212; border: 1px solid #282828;
+            margin-bottom: 24px; position: relative; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer;
+        }
+
+        .logo-showcase:hover {
+            border-color: rgba(160, 160, 160, 0.4);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            transform: translateY(-2px);
+        }
+
+        .logo-inner-magnetic {
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            transition: transform 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+            z-index: 4;
+        }
+
+        .international-logo-svg {
+            width: 110px; height: 110px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo-showcase:hover .international-logo-svg { transform: scale(1.08) rotate(3deg); }
+
+        .geo-line {
+            stroke: #C0C0C0; stroke-width: 1.5; fill: none; stroke-linecap: square;
+            stroke-dasharray: 60; stroke-dashoffset: 0;
+            animation: continuousChase 6s linear infinite;
+        }
+
+        .geo-accent {
+            stroke: #808080; stroke-width: 1.25; fill: none;
+            stroke-dasharray: 80; stroke-dashoffset: 0;
+            animation: continuousChaseReverse 8s linear infinite;
+        }
+
+        @keyframes continuousChase {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -120; }
+        }
+
+        @keyframes continuousChaseReverse {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 160; }
+        }
+
+        /* Artistic Marquee */
+        .artistic-marquee {
+            width: 100%; overflow: hidden; white-space: nowrap;
+            margin-bottom: 32px; border-top: 1px solid #282828; border-bottom: 1px solid #282828;
+            padding: 9px 0; background: rgba(18, 18, 18, 0.5);
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marqueeScroll 28s linear infinite;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic; font-size: 13px;
+            letter-spacing: 0.18em; color: #808080; text-transform: uppercase;
+        }
+
+        .marquee-track span { margin-right: 45px; }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .front-contact {
+            text-align: right; font-size: 13px; color: #909090;
+            margin-bottom: 40px; line-height: 2; font-weight: 300;
+            letter-spacing: 0.05em; font-style: italic;
+        }
+
+        .contact-line {
+            display: inline-flex; align-items: center; justify-content: flex-end;
+            text-decoration: none; color: #909090;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .contact-line:hover { color: #C0C0C0; transform: translateX(-3px); }
+
+        footer {
+            text-align: center; font-size: 10px; color: #707070;
+            padding-top: 10px; margin-bottom: 20px;
+            letter-spacing: 0.28em; text-transform: uppercase; font-weight: 300;
+        }
+
+        /* Overlay Menu */
+        .overlay-menu {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0A0A0A; z-index: 1000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s, background-color 0.4s;
+        }
+
+        .overlay-menu.active { opacity: 1; visibility: visible; }
+
+        /* Top-Right Close Icon for Overlay Menu */
+        .overlay-close-btn {
+            position: absolute; top: 35px; right: 35px;
+            background: none; border: none; cursor: pointer;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            color: #C0C0C0; transition: transform 0.3s, color 0.3s;
+        }
+        .overlay-close-btn svg {
+            width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5;
+        }
+        .overlay-close-btn:hover { transform: rotate(90deg); color: #808080; }
+
+        .menu-links { list-style: none; text-align: center; }
+        .menu-links li {
+            margin: 22px 0; opacity: 0; transform: translateY(25px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .overlay-menu.active .menu-links li:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+        .overlay-menu.active .menu-links li:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.22s; }
+        .overlay-menu.active .menu-links li:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
+
+        .menu-links a {
+            font-family: 'Cormorant Garamond', serif; text-decoration: none;
+            font-size: 30px; color: #C0C0C0; font-weight: 300; font-style: italic;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            transition: color 0.3s, font-style 0.3s, transform 0.3s, letter-spacing 0.3s;
+            display: inline-flex; align-items: center; gap: 12px; position: relative;
+        }
+
+        .menu-links a::after {
+            content: ''; position: absolute; left: 0; bottom: -4px; width: 0%; height: 1px;
+            background: #C0C0C0; transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.light-theme .menu-links a::after { background: #303030; }
+
+        .menu-links a svg {
+            width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5;
+            opacity: 0; transform: translateX(-8px); transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .menu-links a:hover { color: #808080; font-style: normal; letter-spacing: 0.22em; transform: scale(1.04); }
+        .menu-links a:hover::after { width: 100%; }
+        .menu-links a:hover svg { opacity: 1; transform: translateX(0); }
+
+        /* Editorial Content Modal Sections */
+        .content-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(10, 10, 10, 0.96);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            z-index: 1002; overflow-y: auto; padding: 60px 24px;
+            display: none; opacity: 0; transform: scale(0.985) translateY(15px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s;
+        }
+
+        .content-modal.active-modal { display: block; opacity: 1; transform: scale(1) translateY(0); }
+        .content-modal.active-modal .stagger-1 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+        .content-modal.active-modal .stagger-2 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; opacity: 0; }
+        .content-modal.active-modal .stagger-3 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+        .content-modal.active-modal .stagger-4 { animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards; opacity: 0; }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .content-modal-inner { max-width: 680px; margin: 0 auto; }
+
+        .back-to-home {
+            background: none; border: none; font-size: 11px; cursor: pointer;
+            margin-bottom: 40px; color: #C0C0C0; text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .back-to-home svg {
+            width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 1.5;
+            transition: transform 0.3s;
+        }
+
+        .back-to-home:hover { color: #808080; transform: translateX(-4px); }
+
+        .editorial-heading-wrap {
+            display: flex; align-items: baseline; gap: 16px;
+            margin-bottom: 16px; border-bottom: 1px solid #282828;
+            padding-bottom: 12px; transition: border-color 0.4s;
+        }
+
+        .editorial-index {
+            font-family: 'Cormorant Garamond', serif; font-size: 14px;
+            font-style: italic; color: #707070; letter-spacing: 0.1em;
+        }
+
+        .content-modal h2 {
+            font-family: 'Cormorant Garamond', serif; font-size: 28px;
+            text-transform: uppercase; letter-spacing: 0.18em; font-weight: 400;
+            color: #C0C0C0; transition: color 0.4s;
+        }
+
+        .editorial-split-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 30px;
+        }
+
+        @media(max-width: 600px) { .editorial-split-grid { grid-template-columns: 1fr; } }
+
+        .editorial-col-box {
+            padding: 22px; background: rgba(18, 18, 18, 0.4);
+            border: 1px solid #282828;
+            transition: background 0.4s, border-color 0.4s, transform 0.4s;
+        }
+
+        .editorial-col-box:hover {
+            transform: translateY(-4px); border-color: rgba(160, 160, 160, 0.3);
+        }
+
+        /* Monogram Line Drawing Animation (Zero Images) */
+        .founder-monogram-container {
+            display: flex; flex-direction: column; align-items: center;
+            margin: 30px 0 20px 0; position: relative;
+        }
+
+        .founder-monogram-svg, .about-animated-logo-svg { width: 85px; height: 85px; }
+
+        .draw-rect {
+            stroke: #808080; stroke-width: 1.25; fill: none;
+            stroke-dasharray: 260; stroke-dashoffset: 260;
+            transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .draw-path {
+            stroke: #C0C0C0; stroke-width: 1.5; fill: none; stroke-linecap: square;
+            stroke-dasharray: 220; stroke-dashoffset: 220;
+            transition: stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+        }
+
+        .draw-circle {
+            fill: #C0C0C0; opacity: 0; transform: scale(0);
+            transform-origin: 50px 50px;
+            transition: opacity 0.6s ease 1.2s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.2s;
+        }
+
+        #subFounderProfile.active-founder .draw-rect,
+        #subCompanyProfile.active-company .draw-rect { stroke-dashoffset: 0; }
+        #subFounderProfile.active-founder .draw-path,
+        #subCompanyProfile.active-company .draw-path { stroke-dashoffset: 0; }
+        #subFounderProfile.active-founder .draw-circle,
+        #subCompanyProfile.active-company .draw-circle { opacity: 1; transform: scale(1); }
+
+        .founder-signature-label {
+            font-family: 'Cormorant Garamond', serif; font-size: 12px; font-style: italic;
+            letter-spacing: 0.2em; color: #808080; margin-top: 10px; text-transform: uppercase;
+        }
+
+        .intro-text {
+            font-size: 14px; color: #A0A0A0; margin-bottom: 36px;
+            line-height: 1.9; font-weight: 300; text-align: justify; letter-spacing: 0.01em;
+        }
+
+        .pro-item {
+            padding: 24px; border: 1px solid #282828; background: rgba(18, 18, 18, 0.2);
+            margin-bottom: 12px; position: relative; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pro-item::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0%;
+            background: #C0C0C0; transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.light-theme .pro-item::before { background: #303030; }
+
+        .pro-item:hover {
+            transform: translateX(4px); border-color: rgba(160, 160, 160, 0.3); background: rgba(25, 25, 25, 0.6);
+        }
+
+        .pro-item:hover::before { height: 100%; }
+
+        .pro-item h3 {
+            font-size: 10px; letter-spacing: 0.2em; color: #808080;
+            text-transform: uppercase; margin-bottom: 6px; font-weight: 400;
+        }
+
+        .pro-item a, .pro-item p {
+            font-size: 15px; color: #C0C0C0; text-decoration: none; font-weight: 300; transition: color 0.4s;
+        }
+
+        .pro-item p { text-align: justify; color: #A0A0A0; }
+        .pro-item a:hover { color: #808080; font-style: italic; }
+
+        /* Smooth Accordion Service Style (Gray Palette Only) */
+        .service-accordion-container {
+            margin-top: 20px;
+        }
+
+        .service-accordion-item {
+            border-bottom: 1px solid #282828;
+            overflow: hidden;
+            transition: border-color 0.4s;
+        }
+
+        .service-accordion-item:first-of-type {
+            border-top: 1px solid #282828;
+        }
+
+        .service-accordion-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 16px; background: transparent; cursor: pointer;
+            width: 100%; border: none; text-align: left; color: #C0C0C0;
+            transition: background-color 0.3s, padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-accordion-header:hover {
+            padding-left: 24px;
+            background-color: rgba(128, 128, 128, 0.04);
+        }
+
+        .service-accordion-left { display: flex; flex-direction: column; gap: 4px; }
+        .service-accordion-main { display: flex; align-items: baseline; gap: 20px; }
+
+        .service-index {
+            font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: #707070; letter-spacing: 0.1em;
+        }
+
+        .service-row-title {
+            font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400;
+            font-style: italic; letter-spacing: 0.1em; text-transform: uppercase; transition: letter-spacing 0.3s, color 0.3s;
+        }
+
+        .service-accordion-header:hover .service-row-title { letter-spacing: 0.16em; color: #FFFFFF; }
+        .service-subtitle-art { font-size: 11px; font-style: italic; color: #808080; letter-spacing: 0.1em; padding-left: 33px; }
+
+        /* Rotational Arrow Cue */
+        .service-arrow-cue {
+            width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-accordion-item.active-accordion .service-arrow-cue {
+            transform: rotate(90deg);
+        }
+
+        /* Smooth Height Expansion */
+        .service-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            background: rgba(18, 18, 18, 0.3);
+            transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), padding 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 0 24px;
+            color: #A0A0A0;
+            font-size: 14px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .service-accordion-item.active-accordion .service-accordion-content {
+            max-height: 250px;
+            padding: 20px 24px 24px 24px;
+            border-top: 1px solid #282828;
+        }
+
+        /* Contact & Typewriter Quote */
+        .epistolary-intro {
+            font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px;
+            color: #A0A0A0; line-height: 1.8; margin-bottom: 30px;
+            border-left: 1px solid #505050; padding-left: 16px; min-height: 60px;
+        }
+
+        .typewriter-cursor {
+            display: inline-block; width: 2px; height: 15px; background-color: #C0C0C0;
+            margin-left: 4px; vertical-align: middle; animation: blinkCursor 0.8s infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .editorial-form { margin-top: 20px; }
+        .form-group { position: relative; margin-bottom: 35px; }
+
+        .form-input {
+            width: 100%; background: transparent; border: none; border-bottom: 1px solid #383838;
+            padding: 12px 0 8px 0; font-family: 'Inter', sans-serif; font-size: 14px;
+            color: #C0C0C0; font-weight: 300; outline: none;
+            transition: border-color 0.3s, color 0.4s, box-shadow 0.3s;
+        }
+
+        .form-label {
+            position: absolute; left: 0; top: 12px; font-size: 11px;
+            font-family: 'Cormorant Garamond', serif; letter-spacing: 0.2em;
+            color: #707070; text-transform: uppercase; pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .form-input:focus, .form-input:not(:placeholder-shown) {
+            border-color: #C0C0C0; box-shadow: 0 4px 14px -4px rgba(160, 160, 160, 0.12);
+        }
+
+        .form-input:focus ~ .form-label, .form-input:not(:placeholder-shown) ~ .form-label {
+            top: -14px; font-size: 9px; color: #808080;
+        }
+
+        textarea.form-input { resize: none; height: 90px; }
+
+        .editorial-submit-btn {
+            background: transparent; border: 1px solid #505050; color: #C0C0C0;
+            padding: 12px 28px; font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); display: inline-flex; align-items: center; gap: 10px;
+        }
+
+        .editorial-submit-btn:hover {
+            background: #C0C0C0; color: #0A0A0A; border-color: #C0C0C0; transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Architectural Background Grid Lines Overlay -->
+    <div class="arch-grid">
+        <div class="arch-grid-col"></div>
+        <div class="arch-grid-col"></div>
+        <div class="arch-grid-col"></div>
+    </div>
+
+    <!-- Cursor Spotlight Effect -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="brand-titles">
+                <h1>H. Dramacy Design</h1>
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Theme">
+                    <svg id="themeIcon" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <div class="divider"></div>
+
+        <!-- Logo Showcase (Magnetic Effect) -->
+        <div class="logo-showcase" id="logoShowcase">
+            <div class="logo-inner-magnetic" id="logoMagnetic">
+                <svg class="international-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="geo-accent" x="18" y="18" width="64" height="64" />
+                    <path class="geo-line" d="M35 25 V75 M65 25 V75 M35 50 H65" />
+                    <circle class="geo-accent" cx="50" cy="50" r="2" fill="currentColor" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Artistic Marquee Ticker -->
+        <div class="artistic-marquee">
+            <div class="marquee-track">
+                <span>Minimalism is simply the perfect amount of everything</span>
+                <span>—</span>
+                <span>H. Dramacy Design Practice</span>
+                <span>—</span>
+                <span>Est. 2025</span>
+                <span>—</span>
+                <span>Minimalism is simply the perfect amount of everything</span>
+                <span>—</span>
+                <span>H. Dramacy Design Practice</span>
+                <span>—</span>
+                <span>Est. 2025</span>
+                <span>—</span>
+            </div>
+        </div>
+
+        <!-- Contact Details -->
+        <div class="front-contact">
+            <p>
+                <a href="tel:+855965212979" class="contact-line">+855 96 5212979</a>
+            </p>
+            <p>
+                <a href="mailto:hourminimalist@gmail.com" class="contact-line">hourminimalist@gmail.com</a>
+            </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <footer>
+            H. Dramacy Design © 2026
+        </footer>
+    </div>
+
+    <!-- Fullscreen Overlay Menu -->
+    <div class="overlay-menu" id="overlayMenu">
+        <!-- Top-Right Close Icon (X) for Menu Only -->
+        <button class="overlay-close-btn" onclick="toggleMenu()" title="Close Menu">
+            <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="menu-links">
+            <li>
+                <a href="#" onclick="openSection('aboutSection')">
+                    About 
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="openSection('serviceSection')">
+                    Service 
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="openSection('contactSection')">
+                    Contact 
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ABOUT SECTION MODAL -->
+    <div class="content-modal" id="aboutSection">
+        <div class="content-modal-inner" id="aboutMainView">
+            <div class="stagger-1">
+                <button class="back-to-home" onclick="returnToMenu()">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back to Index
+                </button>
+            </div>
+            <div class="editorial-heading-wrap stagger-2">
+                <span class="editorial-index">01</span>
+                <h2>About</h2>
+            </div>
+            <p class="intro-text stagger-3">Explore practice discipline or founder background through our curatorial index:</p>
+            
+            <div class="stagger-4">
+                <a href="#" class="service-accordion-header" style="border-bottom: 1px solid #282828; border-top: 1px solid #282828; margin-bottom: 12px; text-decoration: none; display: flex;" onclick="event.preventDefault(); openSubAbout('subCompanyProfile')">
+                    <div class="service-accordion-left">
+                        <div class="service-accordion-main">
+                            <span class="service-index">01</span>
+                            <span class="service-row-title">H. Dramacy Design</span>
+                        </div>
+                        <span class="service-subtitle-art">— Independent Minimalist Practice</span>
+                    </div>
+                    <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a href="#" class="service-accordion-header" style="border-bottom: 1px solid #282828; text-decoration: none; display: flex;" onclick="event.preventDefault(); openSubAbout('subFounderProfile')">
+                    <div class="service-accordion-left">
+                        <div class="service-accordion-main">
+                            <span class="service-index">02</span>
+                            <span class="service-row-title">Founder Profile</span>
+                        </div>
+                        <span class="service-subtitle-art">— Menglyhour Soum & Philosophy</span>
+                    </div>
+                    <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sub-menu 1: H. Dramacy Design -->
+        <div class="content-modal-inner sub-about-detail" id="subCompanyProfile" style="display: none;">
+            <button class="back-to-home" onclick="backToAboutMain()">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Back to About Menu
+            </button>
+            <div class="editorial-heading-wrap">
+                <span class="editorial-index">01.1</span>
+                <h2>H. Dramacy Design</h2>
+            </div>
+            
+            <div class="founder-monogram-container">
+                <svg class="about-animated-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="draw-rect" x="18" y="18" width="64" height="64" />
+                    <path class="draw-path" d="M35 25 V75 M65 25 V75 M35 50 H65" />
+                    <circle class="draw-circle" cx="50" cy="50" r="2" />
+                </svg>
+                <span class="founder-signature-label">Design Practice</span>
+            </div>
+
+            <div class="editorial-split-grid" style="margin-top: 20px;">
+                <div class="editorial-col-box">
+                    <h3 style="font-size: 10px; letter-spacing: 0.2em; color: #808080; text-transform: uppercase; margin-bottom: 10px;">PHILOSOPHY</h3>
+                    <p style="font-size: 13px; line-height: 1.8;">Founded in 2025, an independent graphic design and branding practice built on minimalist aesthetics, spatial purity, and visual precision.</p>
+                </div>
+                <div class="editorial-col-box">
+                    <h3 style="font-size: 10px; letter-spacing: 0.2em; color: #808080; text-transform: uppercase; margin-bottom: 10px;">EXECUTION</h3>
+                    <p style="font-size: 13px; line-height: 1.8;">Delivering high-end corporate identity, strategic signage, and commercial design grounded in flawless practical expertise.</p>
+                </div>
+            </div>
+            
+            <div>
+                <h3 style="font-size: 10px; letter-spacing: 0.2em; color: #808080; text-transform: uppercase; margin-bottom: 12px; font-weight: 400;">WORK EXPERIENCE</h3>
+                
+                <div class="pro-item">
+                    <h3>LUXDESIGN COMPANY (3 Years Experience)</h3>
+                    <p>Specialized in visual layouts, branding assets, and commercial graphic design production.</p>
+                </div>
+                <div class="pro-item">
+                    <h3>JIN XIN ADVERTISING AND DECORATION COMPANY (2 Years Experience)</h3>
+                    <p>Worked within a prominent Chinese advertising and decoration enterprise, managing large-scale commercial designs, structural layouts, and print-ready executions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sub-menu 2: Founder Profile -->
+        <div class="content-modal-inner sub-about-detail" id="subFounderProfile" style="display: none;">
+            <button class="back-to-home" onclick="backToAboutMain()">
+                <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Back to About Menu
+            </button>
+            <div class="editorial-heading-wrap">
+                <span class="editorial-index">01.2</span>
+                <h2>Founder Profile</h2>
+            </div>
+
+            <div class="founder-monogram-container">
+                <svg class="founder-monogram-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="draw-rect" x="18" y="18" width="64" height="64" />
+                    <path class="draw-path" d="M35 25 V75 M65 25 V75 M35 50 H65" />
+                    <circle class="draw-circle" cx="50" cy="50" r="2" />
+                </svg>
+                <span class="founder-signature-label">Menglyhour Soum</span>
+            </div>
+
+            <p class="intro-text" style="text-align: center; margin-top: 15px;">
+                <strong>Menglyhour Soum</strong> — Founder & Principal Designer of H. Dramacy Design. 
+            </p>
+
+            <div class="pro-item">
+                <h3>PROFESSIONAL BACKGROUND</h3>
+                <p>An independent designer rooted in self-taught mastery and 5 years of rigorous hands-on field experience. Committed to the philosophy that true design expertise is demonstrated through practical execution, impeccable taste, and refined visual performance rather than conventional academic paths.</p>
+            </div>
+            
+            <div class="pro-item">
+                <h3>PHILOSOPHY</h3>
+                <p>Minimalism is simply the perfect amount of everything. Every line, space, and structure is thoughtfully curated to project timeless elegance and sharp corporate identity.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE SECTION MODAL WITH SMOOTH ACCORDION EXPANSION -->
+    <div class="content-modal" id="serviceSection">
+        <div class="content-modal-inner" id="serviceMainView">
+            <div class="stagger-1">
+                <button class="back-to-home" onclick="returnToMenu()">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back to Index
+                </button>
+            </div>
+            <div class="editorial-heading-wrap stagger-2">
+                <span class="editorial-index">02</span>
+                <h2>Service</h2>
+            </div>
+            <p class="intro-text stagger-3">Tailored design solutions for modern business branding and commercial signage. Expand a discipline below:</p>
+            
+            <div class="service-accordion-container stagger-4">
+                <!-- Accordion Item 1 -->
+                <div class="service-accordion-item" id="accItem1">
+                    <button class="service-accordion-header" onclick="toggleAccordion('accItem1')">
+                        <div class="service-accordion-left">
+                            <div class="service-accordion-main">
+                                <span class="service-index">01</span>
+                                <span class="service-row-title">Trademarks & Logos</span>
+                            </div>
+                            <span class="service-subtitle-art">— Timeless Visual Asset & Identity</span>
+                        </div>
+                        <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="service-accordion-content">
+                        Creating unique, memorable, and minimalist trademarks & business brand names/logos tailored to represent your company identity with absolute precision.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div class="service-accordion-item" id="accItem2">
+                    <button class="service-accordion-header" onclick="toggleAccordion('accItem2')">
+                        <div class="service-accordion-left">
+                            <div class="service-accordion-main">
+                                <span class="service-index">02</span>
+                                <span class="service-row-title">Commercial Signs</span>
+                            </div>
+                            <span class="service-subtitle-art">— High-Visibility Architectural Signage</span>
+                        </div>
+                        <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="service-accordion-content">
+                        Designing high-visibility, professional commercial & business signs that capture customer attention and enhance street appeal.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div class="service-accordion-item" id="accItem3">
+                    <button class="service-accordion-header" onclick="toggleAccordion('accItem3')">
+                        <div class="service-accordion-left">
+                            <div class="service-accordion-main">
+                                <span class="service-index">03</span>
+                                <span class="service-row-title">Digital Graphic Design</span>
+                            </div>
+                            <span class="service-subtitle-art">— Editorial Media & Brand Content</span>
+                        </div>
+                        <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="service-accordion-content">
+                        Social Media Ads & Promotional Graphics designed to boost engagement and elevate your brand's digital presence.
+                    </div>
+                </div>
+
+                <!-- Accordion Item 4 -->
+                <div class="service-accordion-item" id="accItem4">
+                    <button class="service-accordion-header" onclick="toggleAccordion('accItem4')">
+                        <div class="service-accordion-left">
+                            <div class="service-accordion-main">
+                                <span class="service-index">04</span>
+                                <span class="service-row-title">Exterior Commercial Design</span>
+                            </div>
+                            <span class="service-subtitle-art">— Spatial Concept & Facade Curation</span>
+                        </div>
+                        <svg class="service-arrow-cue" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="service-accordion-content">
+                        Transforming the outside of your business with modern, attractive, and functional architectural concepts that create a powerful first impression and draw in customers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT SECTION MODAL -->
+    <div class="content-modal" id="contactSection">
+        <div class="content-modal-inner">
+            <div class="stagger-1">
+                <button class="back-to-home" onclick="returnToMenu()">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Back to Index
+                </button>
+            </div>
+            <div class="editorial-heading-wrap stagger-2">
+                <span class="editorial-index">03</span>
+                <h2>Contact</h2>
+            </div>
+            <div class="epistolary-intro stagger-3" id="typewriterText"></div>
+            
+            <div class="stagger-4">
+                <div class="pro-item">
+                    <h3>Phone / Telegram</h3>
+                    <a href="tel:+855965212979">+855 96 5212979</a>
+                </div>
+                
+                <div class="pro-item">
+                    <h3>Email Address</h3>
+                    <a href="mailto:hourminimalist@gmail.com">hourminimalist@gmail.com</a>
+                </div>
+
+                <form class="editorial-form" onsubmit="event.preventDefault(); alert('Message transmitted successfully.');">
+                    <div class="form-group">
+                        <input type="text" class="form-input" id="fieldName" placeholder=" " required>
+                        <label class="form-label" for="fieldName">Your Full Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" id="fieldEmail" placeholder=" " required>
+                        <label class="form-label" for="fieldEmail">Your Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" id="fieldMsg" placeholder=" " required></textarea>
+                        <label class="form-label" for="fieldMsg">Your Message or Inquiry</label>
+                    </div>
+                    <button type="submit" class="editorial-submit-btn">
+                        Send Inquiry 
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* Cursor Glow Follow */
+        const cursorGlow = document.getElementById('cursorGlow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        /* Magnetic Logo Effect */
+        const logoShowcase = document.getElementById('logoShowcase');
+        const logoMagnetic = document.getElementById('logoMagnetic');
+
+        logoShowcase.addEventListener('mousemove', (e) => {
+            const rect = logoShowcase.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            logoMagnetic.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+
+        logoShowcase.addEventListener('mouseleave', () => {
+            logoMagnetic.style.transform = 'translate(0px, 0px)';
+        });
+
+        /* Theme Switcher */
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+            const themeIcon = document.getElementById('themeIcon');
+            
+            if (body.classList.contains('light-theme')) {
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-linecap="round" stroke-linejoin="round"/>';
+            } else {
+                themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round"/>';
+            }
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('overlayMenu');
+            const menuBtn = document.getElementById('menuBtn');
+            menu.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+        }
+
+        /* Live Typewriter Effect for Contact Page */
+        let typewriterTimeout = null;
+        function runTypewriter() {
+            const el = document.getElementById('typewriterText');
+            const phrase = '"Greetings H. Dramacy, I am writing to discuss a creative collaboration or commission regarding..."';
+            el.innerHTML = '';
+            let i = 0;
+            
+            function typing() {
+                if (i < phrase.length) {
+                    el.innerHTML = phrase.substring(0, i + 1) + '<span class="typewriter-cursor"></span>';
+                    i++;
+                    typewriterTimeout = setTimeout(typing, 32);
+                } else {
+                    el.innerHTML = phrase + '<span class="typewriter-cursor"></span>';
+                }
+            }
+            typing();
+        }
+
+        function openSection(sectionId) {
+            toggleMenu();
+            const modal = document.getElementById(sectionId);
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('active-modal');
+            }, 10);
+
+            if(sectionId === 'aboutSection') backToAboutMain();
+            if(sectionId === 'contactSection') runTypewriter();
+        }
+
+        /* Return back to the About/Service/Contact overlay menu instead of Home */
+        function returnToMenu() {
+            const modals = document.querySelectorAll('.content-modal');
+            modals.forEach(modal => {
+                modal.classList.remove('active-modal');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 400);
+            });
+            if(typewriterTimeout) clearTimeout(typewriterTimeout);
+            
+            // Re-open overlay menu so user returns to About, Service, Contact list
+            const menu = document.getElementById('overlayMenu');
+            const menuBtn = document.getElementById('menuBtn');
+            menu.classList.add('active');
+            menuBtn.classList.add('active');
+        }
+
+        function closeSections() {
+            const modals = document.querySelectorAll('.content-modal');
+            modals.forEach(modal => {
+                modal.classList.remove('active-modal');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 400);
+            });
+            if(typewriterTimeout) clearTimeout(typewriterTimeout);
+            document.getElementById('menuBtn').classList.remove('active');
+            document.getElementById('overlayMenu').classList.remove('active');
+        }
+
+        /* Smooth Accordion Function for Services */
+        function toggleAccordion(itemId) {
+            const item = document.getElementById(itemId);
+            const isActive = item.classList.contains('active-accordion');
+            
+            // Close all items first for clean smooth toggle
+            document.querySelectorAll('.service-accordion-item').forEach(acc => {
+                acc.classList.remove('active-accordion');
+            });
+
+            // If it wasn't active, open it
+            if (!isActive) {
+                item.classList.add('active-accordion');
+            }
+        }
+
+        function openSubAbout(subId) {
+            document.getElementById('aboutMainView').style.display = 'none';
+            const subs = document.querySelectorAll('.sub-about-detail');
+            subs.forEach(sub => {
+                sub.style.display = 'none';
+                sub.classList.remove('active-founder', 'active-company');
+            });
+            
+            const targetSub = document.getElementById(subId);
+            targetSub.style.display = 'block';
+            setTimeout(() => {
+                targetSub.classList.add(subId === 'subFounderProfile' ? 'active-founder' : 'active-company');
+            }, 80);
+        }
+
+        function backToAboutMain() {
+            const subs = document.querySelectorAll('.sub-about-detail');
+            subs.forEach(sub => {
+                sub.style.display = 'none';
+                sub.classList.remove('active-founder', 'active-company');
+            });
+            document.getElementById('aboutMainView').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
